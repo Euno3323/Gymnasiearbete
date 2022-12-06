@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float PlayerHealth;
+    public float PlayerHP;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerHealth = 1000;    
+        PlayerHP = 1000;    
     }
 
     // Update is called once per frame
