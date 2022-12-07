@@ -355,7 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 5
   runningSpeed: 7.5
-  run: 0
   rb: {fileID: 1900531254}
   cam: {fileID: 519420031}
 --- !u!50 &1900531254
