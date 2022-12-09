@@ -16,14 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
     //Rörelseförändringar
     Vector2 movement;
-    //spelarrotation
-    Vector2 mousePos;
+    //Variabel för spriten
+    public SpriteRenderer spriteRender;
     
     //Startkonditioner
     void Start()
     {
         run = false;
-    }
+        spriteRender = GetComponent<SpriteRenderer>();
+	}
     //Uppdaterar på varje nya bild
     void Update()
     {
@@ -39,7 +40,21 @@ public class PlayerMovement : MonoBehaviour
             run = false;
         }
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //postitionen av musen
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+
+        //Flip spriten på karaktären
+        if (rotZ < 89 && rotZ > -89)
+        {
+            spriteRender.flipX = false;
+        }
+        else 
+        {
+            spriteRender.flipX = true;
+        }
+
+        
     }
     //Konstant uppdatering
     void FixedUpdate()
@@ -53,9 +68,5 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.MovePosition(rb.position + movement * walkingSpeed * Time.fixedDeltaTime);
         }
-
-        Vector2 lookDir = mousePos - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
-    }
+	}
 }
