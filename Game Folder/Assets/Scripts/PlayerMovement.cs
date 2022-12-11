@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private bool run;
     //objektet som skriptet ska påverka/röra
     public Rigidbody2D rb;
-    //används för kamerans position
-    public Camera cam;
+    public GameObject firePoint;
     //Rörelseförändringar
     Vector2 movement;
+    Vector2 mousePos;
     //Variabel för spriten
     public SpriteRenderer spriteRender;
     
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRender.flipX = true;
         }
 
-        
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     //Konstant uppdatering
     void FixedUpdate()
@@ -68,5 +68,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.MovePosition(rb.position + movement * walkingSpeed * Time.fixedDeltaTime);
         }
+        Vector2 firePointPos = new Vector2(firePoint.transform.position.x, firePoint.transform.position.y);
+        Vector3 lookDir = mousePos - firePointPos;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x);
+        firePoint.transform.localPosition = new Vector2(Mathf.Cos(angle) * 0.6f, Mathf.Sin(angle) * 0.6f);
+        angle = angle * Mathf.Rad2Deg - 90f;
+        firePoint.transform.eulerAngles = Vector3.forward * angle;
 	}
 }
