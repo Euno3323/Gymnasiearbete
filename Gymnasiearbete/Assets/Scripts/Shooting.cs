@@ -6,7 +6,6 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-
     public float bulletForce = 20f;
 
     // Update is called once per frame
@@ -16,8 +15,7 @@ public class Shooting : MonoBehaviour
         {
             Shoot();
         }
-    }
-    
+    }   
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);

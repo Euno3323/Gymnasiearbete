@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Gåhastighet
-    public float walkingSpeed = 5f;
+    public float walkingSpeed = 2f;
     //Springhastiget
-    public float runningSpeed = 7.5f;
+    public float runningSpeed = 5f;
     //Sann om spelaren springer, falsk om han går
     private bool run;
     //objektet som skriptet ska påverka/röra
@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public GameObject firePoint;
     //Rörelseförändringar
     Vector2 movement;
-    Vector2 mousePos;
 
     //Variabel för spriten
     public SpriteRenderer spriteRender;
@@ -25,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         run = false;
         spriteRender = GetComponent<SpriteRenderer>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 	}
     //Uppdaterar på varje nya bild
     void Update()
@@ -40,10 +40,6 @@ public class PlayerMovement : MonoBehaviour
         {  
             run = false;
         }
-
-		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
 		//postitionen av musen i jämförelse med spelaren
 		Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
@@ -57,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRender.flipX = true;
         }
+        rotZ -= 90f;
+        firePoint.transform.eulerAngles = Vector3.forward * rotZ;
+        rotZ += 90f;
+        rotZ *= Mathf.Deg2Rad;
+        firePoint.transform.localPosition = new Vector2(Mathf.Cos(rotZ), Mathf.Sin(rotZ));
 	}
     //Konstant uppdatering
     void FixedUpdate()
@@ -70,11 +71,5 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.MovePosition(rb.position + movement * walkingSpeed * Time.fixedDeltaTime);
         }
-        Vector2 firePointPos = new Vector2(firePoint.transform.position.x, firePoint.transform.position.y);
-        Vector3 lookDir = mousePos - firePointPos;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x);
-        firePoint.transform.localPosition = new Vector2(Mathf.Cos(angle) * 0.6f, Mathf.Sin(angle) * 0.6f);
-        angle = angle * Mathf.Rad2Deg - 90f;
-        firePoint.transform.eulerAngles = Vector3.forward * angle;
 	}
 }
