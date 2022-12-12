@@ -12,11 +12,11 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
-        if (isInRange) //Kollar om man är range
+        if (isInRange) //Kollar om man ï¿½r range
         {
-            if (Input.GetKeyDown(interactKey)) //Spelaren ska klicka på knappen
+            if (Input.GetKeyDown(interactKey)) //Spelaren ska klicka pï¿½ knappen
             {
-				SceneManager.LoadScene(2); //Loadar nästa scen
+				SceneManager.LoadScene(2); //Loadar nï¿½sta scen
 			}
         }
     }
