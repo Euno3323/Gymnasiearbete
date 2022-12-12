@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
         if(healthAmount <= 0)
         {
             Debug.Log("restarting");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Application.LoadLevel(Application.loadedLevel);
         }
         if(Input.GetKeyDown(KeyCode.E))
         {
