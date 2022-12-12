@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     //Rörelseförändringar
     Vector2 movement;
     Vector2 mousePos;
+
     //Variabel för spriten
     public SpriteRenderer spriteRender;
     
@@ -40,11 +41,14 @@ public class PlayerMovement : MonoBehaviour
             run = false;
         }
 
-        //postitionen av musen
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+		//postitionen av musen i jämförelse med spelaren
+		Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        //Flip spriten på karaktären
+        //Flippa spriten på karaktären
         if (rotZ < 89 && rotZ > -89)
         {
             spriteRender.flipX = false;
@@ -53,9 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRender.flipX = true;
         }
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
+	}
     //Konstant uppdatering
     void FixedUpdate()
     {
