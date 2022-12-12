@@ -99,10 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ba5d41754741e49b733dd9bec3174a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7011299339462660232, guid: e80b39c61d4a01a498e08e295ddf0c2b, type: 3}
-  speed: 1
-  postattackspeed: 0.5
-  dmg: 10
+  player: {fileID: 0}
+  speed: 3
 --- !u!114 &2768036713691977918
 MonoBehaviour:
   m_ObjectHideFlags: 0
