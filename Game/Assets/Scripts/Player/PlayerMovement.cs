@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public Camera cam;
-	private Rigidbody2D rigidbody;
+	private new Rigidbody2D rigidbody;
 	private Vector2 movement;
 
 
@@ -20,15 +20,15 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTimer = 5f;
     public bool isDashing;
 
+
 	void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+		rigidbody = GetComponent<Rigidbody2D>();
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 		isDashing = false;
 	}
 
 
-    
     void Update()
     {
         dashingTimer += Time.deltaTime;
@@ -56,16 +56,13 @@ public class PlayerMovement : MonoBehaviour
 				rigidbody.AddForce(direction * dashingPower);
 			}
         }
+
+		
+		movement.x = Input.GetAxisRaw("Horizontal");
+		movement.y = Input.GetAxisRaw("Vertical");
+		rigidbody.transform.Translate(movement * runningSpeed * Time.deltaTime);
 	}
-
-
-	
-
-	void FixedUpdate()
-    {
-		float x = Input.GetAxisRaw("Horizontal");
-		float y = Input.GetAxisRaw("Vertical");
-		movement = new Vector3(x, y, 0);
-		rigidbody.MovePosition(rigidbody.position + movement * runningSpeed * Time.deltaTime);
+	 void FixedUpdate()
+	{
 	}
 }
