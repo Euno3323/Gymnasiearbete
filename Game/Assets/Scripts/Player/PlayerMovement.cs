@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-	void Start()
+	private void Start()
     {
 		isDashing = false;
 		canDash = true;
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    void Update()
+    private void Update()
     {
 		if (dashCooldown <= 0)
 		{
@@ -50,10 +50,11 @@ public class PlayerMovement : MonoBehaviour
 		dashCooldown -= Time.deltaTime;
 
 
-		mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
-		dashDirection = new Vector3(mousePosition.x - rigidbody.transform.position.x, mousePosition.y - rigidbody.transform.position.y, 0).normalized;
-		if (Input.GetKey(KeyCode.Space) && canDash) 
+		
+		if (Input.GetKeyDown(KeyCode.Space) && canDash) 
 		{
+			mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+			dashDirection = new Vector3(mousePosition.x - rigidbody.transform.position.x, mousePosition.y - rigidbody.transform.position.y, 0).normalized;
 			isDashing = true;
 		}
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		if (isDashing == true) 
 		{
@@ -71,5 +72,9 @@ public class PlayerMovement : MonoBehaviour
 			canDash = false;
 		}
 		rigidbody.velocity = moveSpeed * Time.deltaTime * movement;
+	}
+
+	private void Test() {
+		
 	}
 }
