@@ -19,12 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
 	[Header("Dashing")]
 	public float dashDistance;
-	public bool canDash;
 	private float dashCooldown;
-	private bool isDashing;
+	public bool canDash;
+	public bool isDashing;
 	private Vector3 mousePosition;
 	private Vector3 dashDirection;
-	private Vector3 dashTarget;
+
 
 
 	void Start()
@@ -32,35 +32,40 @@ public class PlayerMovement : MonoBehaviour
 		isDashing = false;
 		canDash = true;
 		dashCooldown = 0;
+
+
 		rigidbody = GetComponent<Rigidbody2D>();
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 	}
 
 
+
     void Update()
     {
-        mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
-		dashDirection = new Vector3(mousePosition.x - rigidbody.transform.position.x, mousePosition.y - rigidbody.transform.position.y, 0).normalized;
-		dashTarget = rigidbody.transform.position + dashDirection * dashDistance;
-
-		if (dashCooldown <= 0) 
+		if (dashCooldown <= 0)
 		{
 			dashCooldown = 0;
 			canDash = true;
 		}
 		dashCooldown -= Time.deltaTime;
 
+
+		mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+		dashDirection = new Vector3(mousePosition.x - rigidbody.transform.position.x, mousePosition.y - rigidbody.transform.position.y, 0).normalized;
 		if (Input.GetKey(KeyCode.Space) && canDash) 
 		{
 			isDashing = true;
 		}
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 	}
-	 void FixedUpdate()
+
+
+
+	void FixedUpdate()
 	{
 		if (isDashing == true) 
 		{
-			rigidbody.transform.position = dashTarget;
+			rigidbody.transform.position = rigidbody.transform.position + dashDirection * dashDistance;
 			dashCooldown = 5;
 			isDashing = false;
 			canDash = false;
