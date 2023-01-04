@@ -156,6 +156,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1196897762546394495, guid: 0a90f5d6e87c8d547abd46cbc3377be8, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968957131611849152, guid: 0a90f5d6e87c8d547abd46cbc3377be8, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3086666309163075393, guid: 0a90f5d6e87c8d547abd46cbc3377be8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -218,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8874980402730207623, guid: 0a90f5d6e87c8d547abd46cbc3377be8, type: 3}
       propertyPath: moveSpeed
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8874980402730207623, guid: 0a90f5d6e87c8d547abd46cbc3377be8, type: 3}
       propertyPath: dashCooldown
@@ -384,6 +392,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8294700132288954507, guid: 0eab5d25883a28844861059a13870783, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6188554512777967701, guid: 0eab5d25883a28844861059a13870783, type: 3}
       propertyPath: m_RootOrder
       value: 5
