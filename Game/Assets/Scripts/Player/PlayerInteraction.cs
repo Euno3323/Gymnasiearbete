@@ -15,15 +15,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         checkInteraction();
     }
-	private void openInteractableIcon()
-	{
-		interactIcon.SetActive(true);
-	}
+    private void openInteractableIcon()
+    {
+        interactIcon.SetActive(true);
+    }
 
-	private void closeInteractableIcon()
-	{
-		interactIcon.SetActive(false);
-	}
+    private void closeInteractableIcon()
+    {
+        interactIcon.SetActive(false);
+    }
 
     private void checkInteraction()
     {
@@ -41,14 +41,14 @@ public class PlayerInteraction : MonoBehaviour
         }
         if (hits.Length > 0 && Input.GetKeyDown(KeyCode.E))
         {
-            foreach (RaycastHit2D hit in hits) 
+            foreach (RaycastHit2D hit in hits)
             {
-                if (hit.transform.GetComponent<Interactable>()) 
+                if (hit.transform.GetComponent<Interactable>())
                 {
                     hit.transform.GetComponent<Interactable>().Interact();
                     return;
                 }
             }
         }
-	}
+    }
 }
