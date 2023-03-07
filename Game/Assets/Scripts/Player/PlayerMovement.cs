@@ -9,8 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public new Camera camera;
-	private new Rigidbody2D rigidbody;
 	private Vector2 movement;
+	private new Rigidbody2D rigidbody;
 
 
 	[Header("Running")]
@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 		dashCooldown -= Time.deltaTime;
 
 
-		
 		if (Input.GetKeyDown(KeyCode.Space) && canDash) 
 		{
 			mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
@@ -72,9 +71,5 @@ public class PlayerMovement : MonoBehaviour
 			canDash = false;
 		}
 		rigidbody.velocity = moveSpeed * Time.deltaTime * movement;
-	}
-
-	private void Test() {
-		
 	}
 }
