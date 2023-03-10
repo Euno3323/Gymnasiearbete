@@ -7,6 +7,11 @@ public class MainMenu : MonoBehaviour
 {
 	public void playButton() 
 	{
+		StartCoroutine(playButtonTimer());
+	}
+	public IEnumerator playButtonTimer() 
+	{ 
+		yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 

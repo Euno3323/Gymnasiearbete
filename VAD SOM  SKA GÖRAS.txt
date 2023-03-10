@@ -1,0 +1,12 @@
+DASH
+OPTIONS MENY - KAN ÄNDRA LJUD
+
+
+LJUD:
+Bakgrundsmusik
+Ljud för när man klickar på knapp i menyn
+Ljud för när man svingar svärdet
+Ljud för dashen
+Ljud för när tar damage
+Ljud för fiender 
+
