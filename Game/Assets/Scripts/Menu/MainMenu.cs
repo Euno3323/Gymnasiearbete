@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-	public void playButton() 
+	public GameObject OptionsMenuUI;
+	public void Play()
 	{
-		StartCoroutine(playButtonTimer());
-	}
-	public IEnumerator playButtonTimer() 
-	{ 
-		yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene("Main");
 	}
 
-	public void exitButton() 
-	{ 
+	public void Options()
+	{
+		OptionsMenuUI.SetActive(true);
+	}
+
+	public void Exit()
+	{
+		Debug.Log("Exit");
 		Application.Quit();
 	}
 }
