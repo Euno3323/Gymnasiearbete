@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 	private GameObject gameobject;
 	private bool facingRight = true;
 	public Animator animator;
+	public GameObject armPivot;
 
 
 
@@ -58,11 +59,14 @@ public class PlayerMovement : MonoBehaviour
 		if (mousePosition.x < rigidbody.transform.position.x && facingRight)
 		{
 			Flip();
-		}
+            armPivot.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
 
 		else if (mousePosition.x > rigidbody.transform.position.x && !facingRight) 
 		{
 			Flip();
+			armPivot.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
 		}
 
 		if (dashCooldown <= 0)
@@ -79,8 +83,6 @@ public class PlayerMovement : MonoBehaviour
 			isDashing = true;
 		}
 	}
-
-
 
 	private void FixedUpdate()
 	{
