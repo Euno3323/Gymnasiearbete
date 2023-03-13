@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
 	[Header("References")]
 	public new Camera camera;
+	public new Rigidbody2D rigidbody;
 	private Vector2 movement;
-	private new Rigidbody2D rigidbody;
 	private SpriteRenderer sprite;
 	private Vector3 mousePosition;
 
@@ -58,15 +56,6 @@ public class PlayerMovement : MonoBehaviour
 		else if (mousePosition.x > rigidbody.transform.position.x && !facingRight) 
 		{
 			Flip();
-		}
-
-		if (facingRight)
-		{
-			animator.SetBool("facingRight", true);
-		}
-		else
-		{
-			animator.SetBool("facingRight", false);
 		}
 
 		if (dashCooldown > 0) 

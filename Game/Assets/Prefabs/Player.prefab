@@ -183,9 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+  rigidbody: {fileID: 0}
   moveSpeed: 0
-  dashDistance: 0
-  canDash: 0
+  dashSpeed: 0
   isDashing: 0
   animator: {fileID: 6472303263952501583}
 --- !u!114 &5448466138486150029
