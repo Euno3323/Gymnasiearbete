@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 	public GameObject OptionsMenuUI;
+
 	public void Play()
 	{
 		SceneManager.LoadScene("Main");
