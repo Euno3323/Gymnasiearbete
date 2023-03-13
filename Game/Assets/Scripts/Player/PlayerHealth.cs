@@ -18,7 +18,7 @@ public class PlayerHealth : Health
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            TakeDamage(5f);
+            ChangeHealth(-5f);
         }
     }
     private Rigidbody2D m_Rigidbody2D;

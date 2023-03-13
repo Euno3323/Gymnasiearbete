@@ -19,15 +19,8 @@ public abstract class Health : MonoBehaviour
         float oldHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
+
         //OnHealthChanged?.Invoke(this, oldHealth, currentHealth);
-    }
-    public void TakeDamage(float damage){
-        ChangeHealth(-damage);
-        Debug.Log("damage Taken");
-    }
-    public void Heal(float health){
-        ChangeHealth(health);
-        Debug.Log("healed");
     }
     // Update is called once per frame
     void Update()
