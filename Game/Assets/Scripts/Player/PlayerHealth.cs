@@ -5,35 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : Health
 {
-    //public static event OnPlayerDeath;
-    public GameOverScreen GameOverScreen;
-    private Scene scene;
+    public int maxHealth = 3;
+    public int currentHealth;
 
-    private void Start()
-    {
-        scene = SceneManager.GetActiveScene();
-        currentHealth = MaxHealth;
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeHealth(-5f);
-        }
-    }
-    private Rigidbody2D m_Rigidbody2D;
-    public override void ChangeHealth(float amount)
-    {
-        base.ChangeHealth(amount);
-        if (currentHealth == 0)
-        {
-            m_Rigidbody2D = GetComponent<Rigidbody2D>();
+	void Start()
+	{
+		currentHealth = maxHealth;
+	}
 
-            m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-            GameOverScreen.Setup(scene);
+	void Update()
+	{
+		if (currentHealth <= 0) 
+		{
+			die();
+		}
+	}
 
+	public void takeDamage() 
+	{
+		currentHealth -= 1;
+	}
 
-            //OnPlayerDeath?.Invoke();
-        }
-    }
+	public void die() 
+	{ 
+		Destroy(gameObject);
+	}
 }

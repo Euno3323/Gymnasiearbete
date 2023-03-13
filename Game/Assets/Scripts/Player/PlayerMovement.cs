@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 	private Vector2 movement;
 	private new Rigidbody2D rigidbody;
 	private SpriteRenderer sprite;
+	private Vector3 mousePosition;
 
 
 	[Header("Running")]
@@ -19,12 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
 
 	[Header("Dashing")]
-	public float dashDistance;
+	public float dashSpeed;
+	private float dashDuration;
 	private float dashCooldown;
-	public bool canDash;
-	public bool isDashing;
-	private Vector3 mousePosition;
-	private Vector3 dashDirection;
+
+	public bool isDashing = false;
+	private Vector2 dashDirection;
 
 	[Header("Animation")]
 	private GameObject gameobject;
@@ -35,19 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Start()
     {
-		isDashing = false;
-		canDash = true;
-		dashCooldown = 0;
-
-
 		rigidbody = GetComponent<Rigidbody2D>();
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
 		sprite = GetComponent<SpriteRenderer>();
+
 		gameobject = GetComponent<GameObject>();
-
 	}
-
-
 
     private void Update()
     {
@@ -65,30 +60,43 @@ public class PlayerMovement : MonoBehaviour
 			Flip();
 		}
 
-		if (dashCooldown <= 0)
+		if (facingRight)
 		{
-			dashCooldown = 0;
-			canDash = true;
+			animator.SetBool("facingRight", true);
 		}
-		dashCooldown -= Time.deltaTime;
-
-
-		if (Input.GetKeyDown(KeyCode.Space) && canDash) 
+		else
 		{
-			dashDirection = new Vector3(mousePosition.x - rigidbody.transform.position.x, mousePosition.y - rigidbody.transform.position.y, 0).normalized;
-			isDashing = true;
+			animator.SetBool("facingRight", false);
+		}
+
+		if (dashCooldown > 0) 
+		{
+			dashCooldown -= Time.deltaTime;
+		}
+		else if (dashCooldown <= 0) 
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				dashDirection = (mousePosition - rigidbody.transform.position).normalized;
+
+				isDashing = true;
+				dashCooldown = 2f;
+				dashDuration = 0.3f;
+			}
+		}
+		if (isDashing) 
+		{
+			dashDuration -= Time.deltaTime;
+			if (dashDuration <= 0) 
+			{
+				isDashing = false;
+				animator.SetBool("isDashing", false);
+			}
 		}
 	}
 
-
-
 	private void FixedUpdate()
 	{
-		if (isDashing == true) 
-		{
-			Dash();
-		}
-
 		rigidbody.velocity = moveSpeed * Time.deltaTime * movement;
 
 		if (movement != Vector2.zero)
@@ -99,21 +107,17 @@ public class PlayerMovement : MonoBehaviour
 		{
 			animator.SetBool("isMoving", false);
 		}
+
+		if (isDashing) 
+		{
+			rigidbody.velocity = dashDirection * dashSpeed;
+			animator.SetBool("isDashing", true);
+		}
 	}
-
-
-
 	private void Flip() 
 	{
 		sprite.flipX = !sprite.flipX;
 		facingRight = !facingRight;
 	}
 
-	private void Dash() 
-	{
-		rigidbody.transform.position = rigidbody.transform.position + dashDirection * dashDistance;
-		dashCooldown = 5;
-		isDashing = false;
-		canDash = false;
-	}
 }
