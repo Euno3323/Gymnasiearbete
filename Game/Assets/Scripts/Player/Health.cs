@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,16 +7,22 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float health;
+    public int maxHealth;
+    private int currentHealth;
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+
+	void Start()
+	{
+        currentHealth = maxHealth;
+	}
 
 	void Update()
 	{
         for (int i = 0; i < hearts.Length; i++) 
         {
-            if (i < health)
+            if (i < currentHealth)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -24,15 +31,22 @@ public class Health : MonoBehaviour
                 hearts[i].sprite = emptyHeart;
             }
         }
+        if (currentHealth <= 0) 
+        {
+            die();
+        }
 	}
 
     public void takeDamage() 
     {
-        health -= 1;
+        currentHealth -= 1;
+
+        //Fixa att att man tar damage som är bestämd för olika mobs, fixa animation
     }
 
     public void die() 
     {
-        gameObject.SetActive(true);
+        Debug.Log("Player died");
+        //Gör Death Animation och gör så att spelet freezar samt tillåt inte att öppna pausemenyn
     }
 }

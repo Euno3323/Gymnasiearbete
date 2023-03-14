@@ -5,19 +5,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	[Header("References")]
 	public new Camera camera;
 	public new Rigidbody2D rigidbody;
+	public SpriteRenderer sword;
 	private Vector2 movement;
 	private SpriteRenderer sprite;
 	private Vector3 mousePosition;
 
-
-	[Header("Running")]
 	public float moveSpeed;
 
-
-	[Header("Dashing")]
 	public float dashSpeed;
 	private float dashDuration;
 	private float dashCooldown;
@@ -25,10 +21,9 @@ public class PlayerMovement : MonoBehaviour
 	public bool isDashing = false;
 	private Vector2 dashDirection;
 
-	[Header("Animation")]
-	private GameObject gameobject;
 	private bool facingRight = true;
-	public Animator animator;
+	public Animator playerAnimator;
+	public Animator swordAnimator;
 
 
 
@@ -38,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
 		sprite = GetComponent<SpriteRenderer>();
-
-		gameobject = GetComponent<GameObject>();
 	}
 
     private void Update()
@@ -50,11 +43,13 @@ public class PlayerMovement : MonoBehaviour
 
 		if (mousePosition.x < rigidbody.transform.position.x && facingRight)
 		{
+			swordAnimator.SetBool("facingRight", false);
 			Flip();
 		}
 
 		else if (mousePosition.x > rigidbody.transform.position.x && !facingRight) 
 		{
+			swordAnimator.SetBool("facingRight", true);
 			Flip();
 		}
 
@@ -79,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 			if (dashDuration <= 0) 
 			{
 				isDashing = false;
-				animator.SetBool("isDashing", false);
+				playerAnimator.SetBool("isDashing", false);
 			}
 		}
 	}
@@ -90,22 +85,23 @@ public class PlayerMovement : MonoBehaviour
 
 		if (movement != Vector2.zero)
 		{
-			animator.SetBool("isMoving", true);
+			playerAnimator.SetBool("isMoving", true);
 		}
 		else 
 		{
-			animator.SetBool("isMoving", false);
+			playerAnimator.SetBool("isMoving", false);
 		}
 
 		if (isDashing) 
 		{
 			rigidbody.velocity = dashDirection * dashSpeed;
-			animator.SetBool("isDashing", true);
+			playerAnimator.SetBool("isDashing", true);
 		}
 	}
 	private void Flip() 
 	{
 		sprite.flipX = !sprite.flipX;
+		sword.flipY = !sword.flipY;
 		facingRight = !facingRight;
 	}
 

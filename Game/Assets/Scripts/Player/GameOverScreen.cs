@@ -6,24 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
-    private Scene scene;
-    /*private void Start()
+    public void Restart() 
     {
-        gameObject.SetActive(false);
-    }*/
-    public void Setup(Scene importScene)
-    {
-        gameObject.SetActive(true);
-        scene = importScene;
-    }
-
-    public void RestartButton()
-    {
-        SceneManager.LoadScene(scene.ToString());
-    }
-
-    public void ExitButton()
-    {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 }
