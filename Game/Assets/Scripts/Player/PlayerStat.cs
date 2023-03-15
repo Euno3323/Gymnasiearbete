@@ -21,12 +21,12 @@ public class PlayerStat : MonoBehaviour, IStatInterface
     public Transform attackPoint;
     public LayerMask enemyLayer;
 
-	void Start()
+	private void Start()
 	{
         currentHealth = maxHealth;
 	}
 
-	void Update()
+	private void Update()
 	{
         if (Input.GetMouseButtonDown(0)) 
         {
@@ -45,11 +45,6 @@ public class PlayerStat : MonoBehaviour, IStatInterface
                 hearts[i].sprite = emptyHeart;
             }
         }
-
-		if (Input.GetKeyDown(KeyCode.L))
-		{
-			takeDamage(1);
-		}
 	}
 
     public void Die() 
@@ -63,7 +58,7 @@ public class PlayerStat : MonoBehaviour, IStatInterface
 
 		foreach (Collider2D enemy in hitEnemies)
 		{
-			enemy.GetComponent<Enemy>().takeDamage(attackDamage);
+			enemy.GetComponent<MeeleEnemyStat>().takeDamage(attackDamage);
 		}
 	}
 
