@@ -26,7 +26,7 @@ public class MeleeEnemyStat : MonoBehaviour, IStatInterface
 
 	public void Die()
 	{
-		Debug.Log("Enemy Died");
+		Destroy(gameObject);
 	}
 
 	public void Attack(int attackDamage)
@@ -43,7 +43,6 @@ public class MeleeEnemyStat : MonoBehaviour, IStatInterface
 
 	public void takeDamage(int damage)
 	{
-		Debug.Log("Enemy took damage");
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{

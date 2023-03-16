@@ -13,8 +13,8 @@ public class PlayerAttackAndHealth : MonoBehaviour, IStatInterface
 	[SerializeField]
 	private float attackRange = 1f;
 	private int attackDamage = 1;
-	private float attackCooldown = 1f;
-	private float passedTime = 1f;
+	private float attackCooldown = 0.5f;
+	private float passedTime = 0.5f;
 
 	[SerializeField]
 	private int maxHealth = 4;
@@ -25,6 +25,7 @@ public class PlayerAttackAndHealth : MonoBehaviour, IStatInterface
 
 	[SerializeField]
 	public Animator swordAnimator;
+	public Animator spriteAnimator;
 
 
 	public void Start()
@@ -92,6 +93,7 @@ public class PlayerAttackAndHealth : MonoBehaviour, IStatInterface
 
 	public void takeDamage(int damage)
 	{
+		spriteAnimator.SetTrigger("takeDamage");
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{
