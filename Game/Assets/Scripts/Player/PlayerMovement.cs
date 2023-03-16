@@ -55,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				dashDirection = (mousePosition - rigidbody.transform.position).normalized;
+				dashDirection = (mousePosition - rigidbody.transform.position);
+
+				dashDirection.Normalize();
 
 				isDashing = true;
 				dashCooldown = 2f;

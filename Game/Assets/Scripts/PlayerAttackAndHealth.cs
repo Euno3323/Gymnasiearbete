@@ -78,7 +78,7 @@ public class PlayerAttackAndHealth : MonoBehaviour, IStatInterface
 
 		foreach (Collider2D enemy in hitEnemies)
 		{
-			enemy.GetComponent<MeleeEnemyStat>().takeDamage(attackDamage);
+			enemy.GetComponent<IStatInterface>().takeDamage(attackDamage);
 		}
 	}
 
