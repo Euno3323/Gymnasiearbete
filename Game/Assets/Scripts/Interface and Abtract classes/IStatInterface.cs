@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IStatInterface 
+interface IStatInterface
 {
-    void Attack();
+	public void Die();
 
-    void takeDamage(int damage);
+	public void Attack(int attackDamage);
 
-    void Die();
+	public void takeDamage(int damage);
 }

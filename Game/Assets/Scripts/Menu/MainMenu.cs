@@ -11,17 +11,23 @@ public class MainMenu : MonoBehaviour
 
 	public void Play()
 	{
-		SceneManager.LoadScene("Main");
-	}
-
-	public void Options()
-	{
-		OptionsMenuUI.SetActive(true);
+		StartCoroutine(WaitPlay());
 	}
 
 	public void Exit()
 	{
-		Debug.Log("Exit");
+		StartCoroutine(WaitExit());
+	}
+
+	IEnumerator WaitPlay() 
+	{
+		yield return new WaitForSeconds(1f);
+		SceneManager.LoadScene("Main");
+	}
+
+	IEnumerator WaitExit()
+	{
+		yield return new WaitForSeconds(1f);
 		Application.Quit();
 	}
 }

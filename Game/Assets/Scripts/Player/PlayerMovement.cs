@@ -7,9 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public new Camera camera;
 	public new Rigidbody2D rigidbody;
-	public SpriteRenderer sword;
 	private Vector2 movement;
-	private SpriteRenderer sprite;
 	private Vector3 mousePosition;
 
 	public float moveSpeed;
@@ -22,17 +20,15 @@ public class PlayerMovement : MonoBehaviour
 	private Vector2 dashDirection;
 
 	private bool facingRight = true;
-	public Animator playerAnimator;
-	public Animator swordAnimator;
 
+	public Animator playerAnimator;
+	public SpriteRenderer playerSprite;
 
 
 	private void Start()
     {
 		rigidbody = GetComponent<Rigidbody2D>();
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-		sprite = GetComponent<SpriteRenderer>();
 	}
 
     private void Update()
@@ -43,13 +39,11 @@ public class PlayerMovement : MonoBehaviour
 
 		if (mousePosition.x < rigidbody.transform.position.x && facingRight)
 		{
-			swordAnimator.SetBool("facingRight", false);
 			Flip();
 		}
 
 		else if (mousePosition.x > rigidbody.transform.position.x && !facingRight) 
-		{
-			swordAnimator.SetBool("facingRight", true);
+		{;
 			Flip();
 		}
 
@@ -73,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
 			dashDuration -= Time.deltaTime;
 			if (dashDuration <= 0) 
 			{
-				isDashing = false;
 				playerAnimator.SetBool("isDashing", false);
+				isDashing = false;
 			}
 		}
 	}
@@ -85,11 +79,11 @@ public class PlayerMovement : MonoBehaviour
 
 		if (movement != Vector2.zero)
 		{
-			playerAnimator.SetBool("isMoving", true);
+			playerAnimator.SetBool("isRunning", true);
 		}
 		else 
 		{
-			playerAnimator.SetBool("isMoving", false);
+			playerAnimator.SetBool("isRunning", false);
 		}
 
 		if (isDashing) 
@@ -100,8 +94,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 	private void Flip() 
 	{
-		sprite.flipX = !sprite.flipX;
-		sword.flipY = !sword.flipY;
+		playerSprite.flipX = !playerSprite.flipX;
 		facingRight = !facingRight;
 	}
 
