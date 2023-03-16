@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979406798246568435}
   - component: {fileID: 1749097347078267634}
-  - component: {fileID: 4198558395374892687}
+  - component: {fileID: 5424700028855533999}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -149959065
+  m_SortingLayerID: -1372191427
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 657758a7571d52f46b2f31fc6f3d41a0, type: 3}
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4198558395374892687
-BoxCollider2D:
+--- !u!60 &5424700028855533999
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,6 +108,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.2490344, y: 0.43230343}
+      - {x: -0.49153805, y: 0.15075493}
+      - {x: -0.50423145, y: -0.2597971}
+      - {x: -0.31480002, y: -0.5}
+      - {x: 0.28427315, y: -0.49754715}
+      - {x: 0.42480683, y: -0.40691757}
+      - {x: 0.49576902, y: -0.2640276}
+      - {x: 0.5, y: 0.16344833}
+      - {x: 0.3868296, y: 0.3153448}
+      - {x: 0.27018952, y: 0.43653393}
