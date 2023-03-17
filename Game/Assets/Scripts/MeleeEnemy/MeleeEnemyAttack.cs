@@ -10,7 +10,7 @@ public class MeleeEnemyAttack : MonoBehaviour, IAttackInterface
 
 	[SerializeField]
 	private int attackDamage = 1;
-	private float attackRange = 0.5f;
+	private float attackRange = 0.8f;
 	public void Attack()
 	{
 		swordAnimator.SetTrigger("isAttacking");

@@ -18,12 +18,15 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 
 	[SerializeField]
 	private bool inCombat = false;
-	private float combatTimer = 10f;
+	private float combatTimer = 5f;
 	private float passedTime;
+
+	[SerializeField]
 
 	private void Awake()
 	{
 		currentHealth = maxHealth;
+		StartCoroutine(Regen());
 	}
 
 	private void Update()
@@ -39,6 +42,18 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 				hearts[i].sprite = emptyHeart;
 			}
 		}
+
+		if (inCombat) 
+		{
+			if (passedTime >= combatTimer)
+			{
+				inCombat = false;
+			}
+			else 
+			{
+				passedTime += Time.deltaTime;
+			}
+		}
 	}
 	public void Die()
 	{
@@ -49,8 +64,8 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 	public void takeDamage(int damage)
 	{
 		spriteAnimator.SetTrigger("takeDamage");
-		passedTime = 0;
 		inCombat = true;
+		passedTime = 0;
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{
@@ -60,18 +75,16 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 
 	private IEnumerator Regen()
 	{
-		if (!inCombat)
+		while (true) 
 		{
-			if (currentHealth < maxHealth)
+			if (!inCombat)
 			{
-				currentHealth++;
+				if (currentHealth < maxHealth)
+				{
+					currentHealth++;
+				}
 			}
-			yield return new WaitForSeconds(1f);
-		}
-
-		if (inCombat) 
-		{ 
-			
+			yield return new WaitForSeconds(3f);
 		}
 	}
 }

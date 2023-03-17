@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnterBossArena : MonoBehaviour
 {
     public GameObject HealthBarWrapper;
+
+    public GameObject Wall;
     private void OnTriggerEnter2D(Collider2D other) {
         //Debug.Log("enter");
         if (other.gameObject.GetComponent<PlayerHealth>() != null)
@@ -14,6 +16,6 @@ public class EnterBossArena : MonoBehaviour
     }
     private void StartBossFight() {
         HealthBarWrapper.SetActive(true);
-        //Debug.Log("fight started");
+        Wall.SetActive(true);
     }
 }
