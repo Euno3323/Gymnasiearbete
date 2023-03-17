@@ -8,36 +8,26 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 	public Image[] hearts;
 	public Sprite fullHeart;
 	public Sprite emptyHeart;
-
 	public Animator spriteAnimator;
-
 	public GameObject gameOverPanel;
-	private bool isRegenHealth;
-	private float HealthRegenCooldownCounter;
-	public float HealthRegenCooldown = 10f;
-	private float takeDamageCooldownCounter;
 
 	[SerializeField]
 	private int maxHealth = 4;
 	private int currentHealth;
 
+
+	[SerializeField]
+	private bool inCombat = false;
+	private float combatTimer = 10f;
+	private float passedTime;
+
 	private void Awake()
 	{
 		currentHealth = maxHealth;
-		takeDamageCooldownCounter = Time.deltaTime;
 	}
 
 	private void Update()
 	{
-		if (currentHealth <= maxHealth && HealthRegenCooldownCounter >= HealthRegenCooldown)
-		{
-			StartCoroutine(RegainHealthOverTime());
-		}
-		if (HealthRegenCooldownCounter < HealthRegenCooldown)
-		{
-			HealthRegenCooldownCounter = Time.deltaTime;
-		}
-
 		for (int i = 0; i < hearts.Length; i++)
 		{
 			if (i < currentHealth)
@@ -58,25 +48,30 @@ public class PlayerHealth : MonoBehaviour, IHealthInterface
 
 	public void takeDamage(int damage)
 	{
-		if (takeDamageCooldownCounter >= 0.5f)
+		spriteAnimator.SetTrigger("takeDamage");
+		passedTime = 0;
+		inCombat = true;
+		currentHealth -= damage;
+		if (currentHealth <= 0)
 		{
-			takeDamageCooldownCounter = 0;
-			spriteAnimator.SetTrigger("takeDamage");
-			currentHealth -= damage;
-			if (currentHealth <= 0)
-			{
-				Die();
-			}
-		}
-		if (takeDamageCooldownCounter < 0.5)
-		{
-			takeDamageCooldownCounter += Time.deltaTime;
+			Die();
 		}
 	}
-	private IEnumerable RegainHealthOverTime() {
-		isRegenHealth = true;
-		currentHealth += 1;
-		yield return new WaitForSeconds(5f);
-		isRegenHealth = false;
+
+	private IEnumerator Regen()
+	{
+		if (!inCombat)
+		{
+			if (currentHealth < maxHealth)
+			{
+				currentHealth++;
+			}
+			yield return new WaitForSeconds(1f);
+		}
+
+		if (inCombat) 
+		{ 
+			
+		}
 	}
 }
