@@ -12,7 +12,7 @@ public class BossAttack : MonoBehaviour, IAttackInterface
     public int attackDamage = 5;
     public float attackRange = 1;
     public void Attack() {
-        animator.SetTrigger("isAttacking");
+        //animator.SetTrigger("isAttacking");
 
 		Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
