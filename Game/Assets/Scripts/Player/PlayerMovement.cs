@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 				dashDirection.Normalize();
 
 				isDashing = true;
-				dashCooldown = 2f;
+				dashCooldown = 0.5f;
 				dashDuration = 0.3f;
 			}
 		}
