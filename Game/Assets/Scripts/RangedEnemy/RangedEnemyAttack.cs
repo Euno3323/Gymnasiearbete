@@ -16,7 +16,7 @@ public class RangedEnemyAttack : MonoBehaviour, IAttackInterface
 		Vector2 direction = player.transform.position - attackPoint.position;
 		direction.Normalize();
 		Rigidbody2D rb = Arrow.GetComponent<Rigidbody2D>();
-		rb.velocity = direction * 5f; 
+		rb.velocity = direction * 7.5f; 
 		
 		Destroy(Arrow, 5);
 	}
