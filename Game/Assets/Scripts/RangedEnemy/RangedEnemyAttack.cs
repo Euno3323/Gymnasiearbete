@@ -5,9 +5,19 @@ using UnityEngine;
 public class RangedEnemyAttack : MonoBehaviour, IAttackInterface
 {
 	[SerializeField]
-	private int attackDamage = 1;
+	public GameObject arrow_prefab;
+	public Transform attackPoint;
+	public GameObject player;
+	//private int attackDamage = 5;
 	public void Attack() 
 	{ 
-	
+		GameObject Arrow = Instantiate(arrow_prefab, attackPoint.position, attackPoint.rotation);
+		
+		Vector2 direction = player.transform.position - attackPoint.position;
+		direction.Normalize();
+		Rigidbody2D rb = Arrow.GetComponent<Rigidbody2D>();
+		rb.velocity = direction * 5f; 
+		
+		Destroy(Arrow, 5);
 	}
 }

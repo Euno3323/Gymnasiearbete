@@ -14,7 +14,8 @@ public class RangedEnemyAi : MonoBehaviour
 	private int chaseDistanceThreshold = 10, attackDistanceThreshold = 4, runawayDistanceThreshold = 3;
 
 	[SerializeField]
-	private float attackDelay = 3, passedTime;
+	private float attackCooldown = 3f;
+	private float passedTime = 0.5f;
 
 	[SerializeField]
 	private float maxSpeed = 2;
@@ -25,7 +26,6 @@ public class RangedEnemyAi : MonoBehaviour
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		passedTime = attackDelay;
 	}
 
 	private void Update()
@@ -34,23 +34,31 @@ public class RangedEnemyAi : MonoBehaviour
 		{
 			return;
 		}
-
+		if (passedTime < attackCooldown)
+		{
+			passedTime += Time.deltaTime;
+			Debug.Log(passedTime + attackCooldown);
+		}
 		float distance = Vector2.Distance(player.position, transform.position);
 		if (distance < chaseDistanceThreshold)
 		{
 			if (distance < attackDistanceThreshold)
 			{
-				if (distance < runawayDistanceThreshold)
+				if (distance < runawayDistanceThreshold && passedTime > attackCooldown)
 				{
+					//&& passedTime > attackCooldown
 					Vector2 direction = player.position - transform.position;
 					direction.Normalize();
 					rb.velocity = direction * -maxSpeed;
 
-					//ATTACK
+					
+					gameObject.GetComponent<RangedEnemyAttack>().Attack();
+					passedTime = 0;	
 				}
-				else
+				else if (passedTime > attackCooldown)
 				{
-					//ATTACK
+					gameObject.GetComponent<RangedEnemyAttack>().Attack();
+					passedTime = 0;
 				}
 			}
 			else 
@@ -90,7 +98,6 @@ public class RangedEnemyAi : MonoBehaviour
 			armPivot.rotation = Quaternion.Euler(180f, 0f, -rotation);
 		}
 	}
-
 	private void Flip() 
 	{
 		sprite.flipX = !sprite.flipX;
