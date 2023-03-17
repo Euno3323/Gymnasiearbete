@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
 				if (passedTime >= attackDelay)
 				{
 					passedTime = 0;
-					GetComponent<IAttackInterface>().Attack();
+					GetComponent<MeleeEnemyAttack>().Attack();
 				}
 			}
 			else

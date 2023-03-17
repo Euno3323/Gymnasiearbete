@@ -46,19 +46,11 @@ public class RangedEnemyAi : MonoBehaviour
 					direction.Normalize();
 					rb.velocity = direction * -maxSpeed;
 
-					if (passedTime >= attackDelay)
-					{
-						passedTime = 0;
-						GetComponent<RangedEnemyAttack>().Attack();
-					}
+					//ATTACK
 				}
 				else
 				{
-					if (passedTime >= attackDelay)
-					{
-						passedTime = 0;
-						GetComponent<RangedEnemyAttack>().Attack();
-					}
+					//ATTACK
 				}
 			}
 			else 
@@ -72,12 +64,6 @@ public class RangedEnemyAi : MonoBehaviour
 		{
 			return;
 		}
-
-		if (passedTime < attackDelay)
-		{
-			passedTime += Time.deltaTime;
-		}
-
 		if (player.position.x < transform.position.x && facingRight)
 		{
 			Flip();
