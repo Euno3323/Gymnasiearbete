@@ -7,6 +7,9 @@ public class EnterBossArena : MonoBehaviour
     public GameObject HealthBarWrapper;
 
     public GameObject Wall;
+
+    public GameObject Boss;
+
     private void OnTriggerEnter2D(Collider2D other) {
         //Debug.Log("enter");
         if (other.gameObject.GetComponent<PlayerHealth>() != null)
@@ -17,5 +20,6 @@ public class EnterBossArena : MonoBehaviour
     private void StartBossFight() {
         HealthBarWrapper.SetActive(true);
         Wall.SetActive(true);
+        Boss.GetComponent<BossAi>().isTriggered = true;
     }
 }

@@ -10,6 +10,7 @@ public class BossHealth : MonoBehaviour, IHealthInterface
 	private int currentHealth;
     public GameObject Wrapper;
     public Slider HealthBar;
+	public GameObject endPanel;
 
 	private void Awake()
 	{
@@ -22,6 +23,8 @@ public class BossHealth : MonoBehaviour, IHealthInterface
 	{
 		Destroy(gameObject);
         Wrapper.SetActive(false);
+		endPanel.SetActive(true);
+		Time.timeScale = 0f;
 	}
 
 	public void takeDamage(int damage)

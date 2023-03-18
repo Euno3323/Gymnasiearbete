@@ -8,6 +8,8 @@ public class RangedEnemyHealth : MonoBehaviour, IHealthInterface
     private int maxHealth = 2;
     private int currentHealth;
 
+    public Animator spriteAnimator;
+
 	private void Awake()
 	{
         currentHealth = maxHealth;
@@ -19,6 +21,7 @@ public class RangedEnemyHealth : MonoBehaviour, IHealthInterface
 
     public void takeDamage(int damage) 
     {
+        spriteAnimator.SetTrigger("takeDamage");
         currentHealth -= damage;
         if (currentHealth <= 0) 
         {

@@ -11,7 +11,7 @@ public class RangedEnemyAi : MonoBehaviour
 	private Rigidbody2D rb;
 
 	[SerializeField]
-	private int chaseDistanceThreshold = 10, attackDistanceThreshold = 4, runawayDistanceThreshold = 3;
+	private int chaseDistanceThreshold = 10, attackDistanceThreshold = 7, runawayDistanceThreshold = 3;
 
 	[SerializeField]
 	private float attackCooldown = 3f;
@@ -20,8 +20,10 @@ public class RangedEnemyAi : MonoBehaviour
 	[SerializeField]
 	private float maxSpeed = 2;
 
+	[SerializeField]
 	private bool facingRight = true;
 	public SpriteRenderer sprite;
+	public Animator spriteAnimator;
 
 	private void Awake()
 	{
@@ -37,32 +39,38 @@ public class RangedEnemyAi : MonoBehaviour
 		if (passedTime < attackCooldown)
 		{
 			passedTime += Time.deltaTime;
-			Debug.Log(passedTime + attackCooldown);
 		}
 		float distance = Vector2.Distance(player.position, transform.position);
 		if (distance < chaseDistanceThreshold)
 		{
 			if (distance < attackDistanceThreshold)
 			{
-				if (distance < runawayDistanceThreshold && passedTime > attackCooldown)
+				if (distance < runawayDistanceThreshold)
 				{
-					//&& passedTime > attackCooldown
+					spriteAnimator.SetBool("isRunning", true);
 					Vector2 direction = player.position - transform.position;
 					direction.Normalize();
 					rb.velocity = direction * -maxSpeed;
 
-					
-					gameObject.GetComponent<RangedEnemyAttack>().Attack();
-					passedTime = 0;	
+					if (passedTime >= attackCooldown) 
+					{
+						gameObject.GetComponent<RangedEnemyAttack>().Attack();
+						passedTime = 0;
+					}
 				}
-				else if (passedTime > attackCooldown)
+				else 
 				{
-					gameObject.GetComponent<RangedEnemyAttack>().Attack();
-					passedTime = 0;
+					spriteAnimator.SetBool("isRunning", false);
+					if (passedTime >= attackCooldown) 
+					{
+						gameObject.GetComponent<RangedEnemyAttack>().Attack();
+						passedTime = 0;
+					}
 				}
 			}
 			else 
 			{
+				spriteAnimator.SetBool("isRunning", true);
 				Vector2 direction = player.position - transform.position;
 				direction.Normalize();
 				rb.velocity = direction * maxSpeed;

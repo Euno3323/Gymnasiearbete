@@ -61,7 +61,6 @@ public class EnemyAI : MonoBehaviour
 		}
 		else
 		{
-			animator.SetBool("isRunning", false);
 			return;
 		}
 

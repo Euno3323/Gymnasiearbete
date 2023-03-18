@@ -5,16 +5,17 @@ using UnityEngine;
 public class BossAttack : MonoBehaviour, IAttackInterface
 {
     public LayerMask playerLayer;
-    public Transform attackPoint;
     public Animator animator;
-    
-    [SerializeField]
-    public int attackDamage = 5;
-    public float attackRange = 1;
+
+	[SerializeField]
+	private int attackDamage = 2;
+
+	[SerializeField]
+	private float attackRange = 2;
     public void Attack() {
         //animator.SetTrigger("isAttacking");
 
-		Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+		Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, attackRange, playerLayer);
 
 		foreach (Collider2D player in hitPlayer)
 		{
@@ -23,10 +24,10 @@ public class BossAttack : MonoBehaviour, IAttackInterface
     }
     void OnDrawGizmosSelected()
 	{
-		if (attackPoint == null)
+		if (transform.position == null)
 		{
 			return;
 		}
-		Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+		Gizmos.DrawWireSphere(transform.position, attackRange);
 	}
 }

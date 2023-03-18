@@ -8,6 +8,8 @@ public class MeleeEnemyHealth : MonoBehaviour, IHealthInterface
 	private int maxHealth = 3;
 	private int currentHealth;
 
+	public Animator spriteAnimator;
+
 	private void Awake()
 	{
 		currentHealth = maxHealth;
@@ -19,6 +21,7 @@ public class MeleeEnemyHealth : MonoBehaviour, IHealthInterface
 
 	public void takeDamage(int damage)
 	{
+		spriteAnimator.SetTrigger("takeDamage");
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{

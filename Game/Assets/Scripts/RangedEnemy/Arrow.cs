@@ -10,6 +10,5 @@ public class Arrow : MonoBehaviour
             other.gameObject.GetComponent<IHealthInterface>().takeDamage(1);
             Destroy(this.gameObject);
         }
-        Debug.Log("DISCO DON BABY 2");
     }
 }

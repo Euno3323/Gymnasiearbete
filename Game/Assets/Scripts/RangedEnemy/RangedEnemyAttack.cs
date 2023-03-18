@@ -8,7 +8,6 @@ public class RangedEnemyAttack : MonoBehaviour, IAttackInterface
 	public GameObject arrow_prefab;
 	public Transform attackPoint;
 	public GameObject player;
-	//private int attackDamage = 5;
 	public void Attack() 
 	{ 
 		GameObject Arrow = Instantiate(arrow_prefab, attackPoint.position, attackPoint.rotation);
