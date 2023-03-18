@@ -18,10 +18,10 @@ public class BossAi : MonoBehaviour
 	private int attackDistanceThreshold = 2;
 
 	[SerializeField]
-	private float maxSpeed = 3f;
+	private float maxSpeed = 4f;
 
 	[SerializeField]
-	private float attackDelay = 5f;
+	private float attackDelay = 3f;
 	private float passedTime;
 
 	private void Awake()
